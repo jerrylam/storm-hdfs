@@ -25,7 +25,6 @@ import org.apache.hadoop.hdfs.DistributedFileSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.seqware.icgc.workflow.annotation.common.Util.FSType;
 import com.google.common.collect.Lists;
 
 public class HDFSSpout extends FileSystemSpout {

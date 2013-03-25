@@ -3,13 +3,8 @@ package datasense.example;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-
-import com.github.seqware.JobEdge;
-import com.github.seqware.icgc.workflow.annotation.command.IOShellCommand;
-import com.github.seqware.icgc.workflow.annotation.common.Util;
+import datasense.example.command.IOShellCommand;
 
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -20,7 +15,7 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
 public class FileIOCommandBolt extends BaseRichBolt {
-	private final IOShellCommand cmd;
+	private final datasense.example.command.IOShellCommand cmd;
 	private final File outputDir;
 	
 	private OutputCollector _collector;
@@ -29,7 +24,6 @@ public class FileIOCommandBolt extends BaseRichBolt {
 	public FileIOCommandBolt(IOShellCommand cmd, File outputDir) throws IOException {
 		this.cmd = cmd;
 		this.outputDir = outputDir;
-		Util.prepareDirectory(outputDir, true);
 	}
 	
 	@Override
