@@ -12,17 +12,29 @@ import java.util.logging.Logger;
 import com.google.common.collect.Lists;
 
 public abstract class IOShellCommand implements Runnable {
+	
+	/**
+	 * return the name of the command
+	 * 
+	 * @return name of the command
+	 */
 	public abstract String getName();
 
+	/**
+	 * Create an executable command based on the inputFile and the outputFile
+	 * 
+	 * @param inputFile
+	 * @param outputFile
+	 * @return a command
+	 */
 	public abstract String create(File inputFile, File outputFile);
 
-	public abstract String get();
-	
-	public String createSummary(File statFile, File outputFile) {
-		return createSummary(statFile, outputFile, getName());
-	}
-	
-	public abstract String createSummary(File statFile, File outputFile, String key);
+	/**
+	 * retrieve the command
+	 * 
+	 * @return a command
+	 */
+	protected abstract String get();
 	
 	@Override
 	public void run() {
@@ -58,7 +70,6 @@ public abstract class IOShellCommand implements Runnable {
 				}
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				Logger.getLogger(this.getClass().getName()).log(Level.SEVERE,
 						"fail to execute the command:" + command, e);
 				throw new RuntimeException(e);
