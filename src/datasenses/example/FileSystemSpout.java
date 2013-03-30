@@ -25,6 +25,7 @@ public abstract class FileSystemSpout extends BaseRichSpout  {
 	
 	private Set<File> workingSet = new HashSet<File>();
 	
+	// every 30 minutes, check for new files to process
 	private final static int WAITING_TIME_MS = 30 * 60 * 1000;
 	
 	@Override
