@@ -1,10 +1,10 @@
-package datasense.example;
+package datasenses.example;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-import datasense.example.command.IOShellCommand;
+import datasenses.example.command.IOShellCommand;
 
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -15,7 +15,7 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 
 public class FileIOCommandBolt extends BaseRichBolt {
-	private final datasense.example.command.IOShellCommand cmd;
+	private final datasenses.example.command.IOShellCommand cmd;
 	private final File outputDir;
 	
 	private OutputCollector _collector;

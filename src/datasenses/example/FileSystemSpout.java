@@ -1,4 +1,4 @@
-package datasense.example;
+package datasenses.example;
 
 import java.io.File;
 import java.util.List;
