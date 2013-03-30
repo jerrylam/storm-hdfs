@@ -1,7 +1,4 @@
-package datasense.example;
-
-import backtype.storm.Config;
-import backtype.storm.topology.OutputFieldsDeclarer;
+package datasenses.example;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,14 +6,8 @@ import java.net.URI;
 import java.util.Map;
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
-import backtype.storm.topology.base.BaseRichSpout;
-import backtype.storm.tuple.Fields;
-import backtype.storm.tuple.Values;
-import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;

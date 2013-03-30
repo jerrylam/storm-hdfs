@@ -1,4 +1,4 @@
-package datasense.example.command;
+package datasenses.example.command;
 
 import java.io.BufferedReader;
 import java.io.File;
