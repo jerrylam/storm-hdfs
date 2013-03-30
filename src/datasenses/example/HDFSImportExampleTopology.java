@@ -3,39 +3,30 @@ package datasenses.example;
 import backtype.storm.Config;
 import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
-import backtype.storm.task.OutputCollector;
-import backtype.storm.task.TopologyContext;
-import backtype.storm.testing.TestWordSpout;
-import backtype.storm.topology.OutputFieldsDeclarer;
 import backtype.storm.topology.TopologyBuilder;
-import backtype.storm.topology.base.BaseRichBolt;
-import backtype.storm.tuple.Fields;
-import backtype.storm.tuple.Tuple;
-import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
-
 import java.io.File;
-import java.util.Map;
 
 import datasenses.example.command.IOShellCommand;
 
 /**
  * This is a basic example of using HDFS as Spout for Storm topology
  */
-public class HDFSExampleTopology {
+public class HDFSImportExampleTopology {
 	
-	private static class ExampleCommand extends IOShellCommand {
+	private static class HDSFImportCommand extends IOShellCommand {
 
 		private String command;
 		@Override
 		public String getName() {
-			return "EXAMPLE";
+			return "IMPORT";
 		}
 
 		@Override
 		public String create(File inputFile, File outputFile) {
 			// process input file and produce outputfile
-			return command;
+			command = "hadoop fs -get " + inputFile.getAbsolutePath() + " " + outputFile.getAbsolutePath(); 
+ 			return command;
 		}
 
 		@Override
@@ -43,18 +34,20 @@ public class HDFSExampleTopology {
 			// TODO Auto-generated method stub
 			return command;
 		}
-		
 	}
     
     public static void main(String[] args) throws Exception {
         TopologyBuilder builder = new TopologyBuilder();
         
         builder.setSpout("hdfs", new HDFSSpout(), 1);        
-        builder.setBolt("bolt", new FileIOCommandBolt(new ExampleCommand(), new File("/tmp/example")), 10)
+        builder.setBolt("import", new FileIOCommandBolt(new HDSFImportCommand(), new File("/tmp/import")), 10)
                 .shuffleGrouping("hdfs");
                 
         Config conf = new Config();
         conf.setDebug(true);
+        
+        // never timeout
+        conf.setMessageTimeoutSecs(Integer.MAX_VALUE);
         
         if(args!=null && args.length > 0) {
             conf.setNumWorkers(3);
